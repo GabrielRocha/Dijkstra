@@ -22,7 +22,9 @@ class Dijkstra():
     def calculate_shortest_path(self):
         position = self.start
         while self.S[self.end-1] == False:
-            weight, vertice = min([ (weight, vertice) for vertice, weight in self.graph.get(position).iteritems() if self.S[vertice-1] == False])
+            weight, vertice = min([ (weight, vertice) 
+                    for vertice, weight in self.graph.get(position).iteritems()
+                    if self.S[vertice-1] == False])
             if self.S[position-1] == False:
                 self.Preds[vertice-1] = position
                 self.S[position-1] = True
