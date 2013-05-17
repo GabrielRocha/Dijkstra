@@ -73,7 +73,10 @@ class Dijkstra():
         pos=nx.spectral_layout(graph)
         nx.draw_networkx_nodes(graph, pos, node_color='r', node_size=500, alpha=0.8)
         nx.draw_networkx_edges(graph,pos,width=1,alpha=0.5)
-        nx.draw_networkx_edges(graph,pos, edge_labels={},edgelist=self.get_list_shortest_path(), width=8,alpha=0.5,edge_color='r')
+        nx.draw_networkx_edges(graph,pos,
+                        edge_labels={},
+                        edgelist=self.get_list_shortest_path(),
+                        width=8,alpha=0.5,edge_color='r')
         nx.draw_networkx_edge_labels(graph,pos, self.get_list_weights_edge(),label_pos=0.3)
         labels=self.set_labels()
         nx.draw_networkx_labels(graph,pos,labels,font_size=16)
