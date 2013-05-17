@@ -43,10 +43,10 @@ class Dijkstra():
                 self.weights[vertice-1] = weight + self.weights[position-1]
 
     def get_Pred(self, vertice):
-        print "Pred : %s" %(self.Preds[vertice-1])
+        return self.Preds[vertice-1]
 
     def get_weight(self,cost):
-        print "Weight : %s" %(self.weights[cost-1])
+        return self.weights[cost-1]
 
     def init_weights(self):
         weights = []
@@ -134,7 +134,7 @@ if __name__ == '__main__':
    print "\n"
    print "Start: %s \nEnd: %s" %(3,6)
    dijkstra = Dijkstra(graph,3,6)
-   print "Pred   : %s" %(dijkstra.Preds)
+   print "Preds   : %s" %(dijkstra.Preds)
    print "Weights : %s" %(dijkstra.weights)
    print "Shortest path : %s" %(dijkstra.shortest_path)
    dijkstra.show_graph()
@@ -156,7 +156,7 @@ if __name__ == '__main__':
    print "\n"
    print "Start: %s \nEnd: %s" %(1,6)
    dijkstra = Dijkstra(graph,1,6)
-   print "Pred   : %s" %(dijkstra.Preds)
+   print "Preds   : %s" %(dijkstra.Preds)
    print "Weights : %s" %(dijkstra.weights)
    print "Shortest path : %s" %(dijkstra.shortest_path)
    dijkstra.show_graph()
@@ -178,7 +178,7 @@ if __name__ == '__main__':
    print "\n"
    print "Start: %s \nEnd: %s" %(1,5)
    dijkstra = Dijkstra(graph,1,5)
-   print "Pred   : %s" %(dijkstra.Preds)
+   print "Preds   : %s" %(dijkstra.Preds)
    print "Weights : %s" %(dijkstra.weights)
    print "Shortest path : %s" %(dijkstra.shortest_path)
    dijkstra.show_graph()
