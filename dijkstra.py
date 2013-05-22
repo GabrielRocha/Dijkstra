@@ -82,7 +82,7 @@ class Dijkstra():
         nx.draw_networkx_edges(graph,pos,width=1,alpha=0.5)
         nx.draw_networkx_edges(graph,pos,
                         edge_labels={},
-                        edgelist=self.get_list_shortest_path(),
+                        edgelist=self.get_edgelist(),
                         width=8,alpha=0.5,edge_color='r')
         nx.draw_networkx_edge_labels(graph,pos, self.get_list_weights_edge(),label_pos=0.3)
         labels=self.set_labels()
@@ -101,7 +101,6 @@ class Dijkstra():
                     horizontalalignment='center',
                     transform=plt.gca().transAxes)
         plt.axis('off')
-        self.get_list_weights_edge()
         plt.show()
     
     def set_labels(self):
@@ -110,7 +109,7 @@ class Dijkstra():
             labels[position]=position
         return labels
     
-    def get_list_shortest_path(self):
+    def get_edgelist(self):
         start =  self.start
         list_shortest_path = []
         for vertex in self.shortest_path:
@@ -144,70 +143,6 @@ if __name__ == '__main__':
    print "\n"
    print "Start: %s \nEnd: %s" %(3,6)
    dijkstra = Dijkstra(graph,3,6)
-   print "Preds   : %s" %(dijkstra.Preds)
-   print "Weights : %s" %(dijkstra.weights)
-   print "Shortest path : %s" %(dijkstra.shortest_path)
-   dijkstra.show_graph()
-    
-   print "\n"
-   print "Exemplo 2 - Graph"
-   graph = { 
-         1: { 2: 1, 4: 3 },
-         2: { 1: 1, 4: 1, 3: 5 },
-         3: { 2: 5, 5: 3, 6: 3 },
-         4: { 1: 3, 2: 1, 5: 1 },
-         5: { 4: 1, 3: 3, 6: 7 },
-         6: { 3: 3, 5: 7 },
-     }
-    
-   for value in range(1,len(graph)+1):
-         print value ,graph.get(value)
-    
-   print "\n"
-   print "Start: %s \nEnd: %s" %(1,6)
-   dijkstra = Dijkstra(graph,1,6)
-   print "Preds   : %s" %(dijkstra.Preds)
-   print "Weights : %s" %(dijkstra.weights)
-   print "Shortest path : %s" %(dijkstra.shortest_path)
-   dijkstra.show_graph()
-    
-   print "\n"
-   print "Exemplo 3 - Graph"    
-   graph = { 
-        1: { 2: 7 , 3: 9 , 6: 14 },
-        2: { 1: 7 , 3: 10, 4: 15 },
-        3: { 1: 9 , 2: 10, 4: 11, 6: 2  },
-        4: { 2: 15, 3: 11, 5: 6  },
-        5: { 4: 6 , 6: 9  },
-        6: { 1: 14, 3: 2 , 5: 9 },
-     }
-    
-   for value in range(1,len(graph)+1):
-       print value, graph.get(value)
-    
-   print "\n"
-   print "Start: %s \nEnd: %s" %(1,5)
-   dijkstra = Dijkstra(graph,1,5)
-   print "Preds   : %s" %(dijkstra.Preds)
-   print "Weights : %s" %(dijkstra.weights)
-   print "Shortest path : %s" %(dijkstra.shortest_path)
-   dijkstra.show_graph()
-   print "Exemplo 1 - Graph"
-   graph = { 
-                 1: { 2: 1, 6: 10 },
-                 2: { 1: 1, 3: 2, 6: 8 },
-                 3: { 2: 2, 5: 5, 4: 1, 6: 6 },
-                 4: { 3: 1, 5: 1 },
-                 5: { 4: 1, 3: 5, 6: 3 },
-                 6: { 1: 10, 5: 3, 2: 8, 3: 6 },
-             }
-      
-   for value in range(1,len(graph)+1):
-       print value, graph.get(value)
-    
-   print "\n"
-   print "Start: %s \nEnd: %s" %(1,6)
-   dijkstra = Dijkstra(graph,1,6)
    print "Preds   : %s" %(dijkstra.Preds)
    print "Weights : %s" %(dijkstra.weights)
    print "Shortest path : %s" %(dijkstra.shortest_path)
