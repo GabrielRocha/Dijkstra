@@ -17,36 +17,40 @@ class Dijkstra():
         self.Preds = self.init_Preds()
         self.S = self.init_S()
         self.shortest_path = []
+        self.calculate_preds()
         self.calculate_shortest_path()
 
-    def calculate_shortest_path(self):
+    def calculate_preds(self):
         position = self.start
         while self.S[self.end-1] == False:
             try:
+                self.calculate_weight(position)
                 weight, vertex = min(
                         [ (weight, vertex) 
-                        for vertex, weight in self.graph.get(position).iteritems()
-                        if self.S[vertex-1] == False]
+                        for vertex, weight in enumerate(self.weights)                         
+                        if self.S[vertex] == False]
                         )
                 if self.S[position-1] == False:
-                    self.Preds[vertex-1] = position
                     self.S[position-1] = True
-                    self.shortest_path.append(position)                
-                    self.calculate_weight(position)
-                if vertex == self.end:
-                    self.S[vertex-1] = True
-                    self.Preds[vertex-1] = position
-                    self.shortest_path.append(vertex)
-                    self.calculate_weight(vertex)
-                position = vertex
+                position = vertex+1
             except:
                 print "Erro - Without shortest path, please check the vertex and weights"
-                self.S[self.end] = True
+                self.S[self.end-1] = True
 
-    def calculate_weight(self,position):
+    def calculate_weight(self,position):        
         for vertex , weight in self.graph.get(position).iteritems():
-            if (weight + self.weights[position-1] < self.weights[vertex-1]):
+            if (weight + self.weights[position-1] <= self.weights[vertex-1]):
+                self.Preds[vertex-1] = position
                 self.weights[vertex-1] = weight + self.weights[position-1]
+
+    def calculate_shortest_path(self):
+        end = self.end
+        self.shortest_path.append(end)
+        while end != -1:
+            if self.Preds[end-1] != -1:
+                self.shortest_path.append(self.Preds[end-1])            
+            end = self.Preds[end-1]
+        self.shortest_path.reverse()
 
     def get_Pred(self, vertex):
         return self.Preds[vertex-1]
@@ -129,20 +133,28 @@ class Dijkstra():
 if __name__ == '__main__':
    print "Exemplo 1 - Graph"
    graph = { 
-           1: { 2: 3, 4: 3 },
-           2: { 1: 3, 4: 1, 3: 1 },
-           3: { 2: 1, 5: 5, 6: 5 },
-           4: { 1: 3, 2: 1, 5: 1 },
-           5: { 4: 1, 3: 5, 6: 1 },
-           6: { 3: 5, 5: 1 },
-       }
+          1: { 2: 1, 6: 10 },
+          2: { 1: 1, 3: 2, 6: 8 },
+          3: { 2: 2, 5: 5, 4: 1, 6: 6 },
+          4: { 3: 1, 5: 1 },
+          5: { 4: 1, 3: 5, 6: 3 },
+          6: { 1: 10, 5: 3, 2: 8, 3: 6 },
+              }
+   graph = { 
+        1: { 2: 1, 4: 3 },
+        2: { 1: 1, 4: 1, 3: 5 },
+        3: { 2: 5, 5: 3, 6: 3 },
+        4: { 1: 3, 2: 1, 5: 1 },
+        5: { 4: 1, 3: 3, 6: 7 },
+        6: { 3: 3, 5: 7 },
+        }
    
    for value in range(1,len(graph)+1):
        print value, graph.get(value)
     
    print "\n"
    print "Start: %s \nEnd: %s" %(3,6)
-   dijkstra = Dijkstra(graph,3,6)
+   dijkstra = Dijkstra(graph,1,6)
    print "Preds   : %s" %(dijkstra.Preds)
    print "Weights : %s" %(dijkstra.weights)
    print "Shortest path : %s" %(dijkstra.shortest_path)
