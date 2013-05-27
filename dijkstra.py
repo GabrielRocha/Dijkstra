@@ -143,7 +143,7 @@ if __name__ == '__main__':
        print value, graph.get(value)
     
    print "\n"
-   print "Start: %s \nEnd: %s" %(3,6)
+   print "Start: %s \nEnd: %s" %(1,6)
    dijkstra = Dijkstra(graph,1,6)
    dijkstra.calculate_preds()
    dijkstra.calculate_shortest_path()
